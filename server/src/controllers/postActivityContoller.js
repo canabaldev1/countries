@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const [newActivity, created] = await Activity.findOrCreate({
       where: activity,
     });
-    res.status(200).json(newActivity);
+    res.status(200).json({ newActivity });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -18,7 +18,7 @@ module.exports = async (req, res) => {
         },
         order: [["name", "ASC"]], //ORDENAR
       });
-      console.log(countries);
+      console.log({ countries });
       if (!countries.length) {
         return res.status(404).json({ error: "Country Not Found" });
       }
@@ -43,7 +43,7 @@ module.exports = async (req, res) => {
       });
     }
 
-    res.status(200).json(countries);
+    res.status(200).json({ countries });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
         },
       ],
     });
-    res.status(200).json(country);
+    res.status(200).json({ country });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
