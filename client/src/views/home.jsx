@@ -1,4 +1,11 @@
+import Cards from "../Components/Cards/Cards";
+
 function Home(params) {
-  return <div>Estoy en home</div>;
+  return (
+    <div>
+      <p>aqui empieza el home</p>
+      <Cards />
+    </div>
+  );
 }
 export default Home;
