@@ -6,16 +6,16 @@ function Card({ id, name, nameCommon, flag, continent, coatOfArms }) {
 
   return (
     <div className={styles.container}>
-      <h2>{id}</h2>
-      <h3>{name}</h3>
-      <h3>{nameCommon}</h3>
-      <h3>{continent}</h3>
+      {/* <h2>{id}</h2> */}
+      <h3 className={styles.name}>{name}</h3>
+      <h3 className={styles.nameCommon}>{nameCommon}</h3>
+      <h3 className={styles.continent}>{continent}</h3>
       <img className={styles.flagImage} src={flag} alt={name} />
 
       {coatOfArms ? (
         <img className={styles.coatOfArmsImage} src={coatOfArms} alt={name} />
       ) : (
-        <img className={styles.flagImage} src={flag} alt={name} />
+        <img className={styles.coatOfArmsImage} src={flag} alt={name} />
       )}
     </div>
   );

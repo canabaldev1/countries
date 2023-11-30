@@ -1,13 +1,34 @@
+* {
+  box-sizing: border-box;
+}
+
 .container {
   border: 1px red solid;
+  background-color: black;
+  position: relative;
+  width: 300px;
+  aspect-ratio: 1;
+  perspective: 500px;
 }
 
 .flagImage {
-  height: 100px;
-  width: 150px;
+  width: 100%;
+  aspect-ratio: 3/2;
   background-size: cover;
   border: 1px red solid;
   object-fit: cover;
+  position: absolute;
+  right: 0;
+  top: 16.66666%;
+  /* transform: translate(0, -50%); */
+  /* animation-play-state: paused; */
+  /* transform-origin: top right; */
+  transition: transform 0.2s linear;
+  border-radius: 10px;
+}
+
+.container:hover .flagImage {
+  transform: translate(0, 50%) rotateX(90deg);
 }
 
 .coatOfArmsImage {
@@ -16,4 +37,12 @@
   background-size: cover;
   border: 1px red solid;
   object-fit: contain;
+  transform: translateZ(10px);
+  display: none;
+}
+
+.nameCommon {
+}
+.continent .name {
+  display: none;
 }
