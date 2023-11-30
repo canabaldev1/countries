@@ -5,7 +5,7 @@ const cors = require("cors");
 
 const server = express();
 
-// taal vez hace falta lo siguiente
+// tal vez hace falta lo siguiente
 
 /*
 server.use((req, res, next) => {

@@ -6,11 +6,14 @@ const { Country, CountryName } = require("../db");
 const fetchAllData = async () => {
   try {
     const { data } = await axios(API_URL);
+    // console.log(data[0].name.common);
     const countries = data.map((country) => {
       return {
         id: country.cioc || country.cca3,
         name: country.name.official,
+        nameCommon: country.name.common,
         flag: country.flags.svg,
+        coatOfArms: country.coatOfArms.svg,
         continent: country.continents && country.continents.toString(),
         capital: country.capital && country.capital.toString(),
         subregion: country.subregion,
@@ -22,12 +25,14 @@ const fetchAllData = async () => {
       updateOnDuplicate: [
         "id",
         "name",
+        "nameCommon",
         "flag",
         "continent",
         "capital",
         "subregion",
         "area",
         "population",
+        "coatOfArms",
       ],
     });
 

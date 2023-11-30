@@ -14,9 +14,17 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
+      nameCommon: {
+        type: DataTypes.STRING(100),
+      },
       flag: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        validate: { isUrl: true },
+      },
+      coatOfArms: {
+        type: DataTypes.STRING(100),
+        // allowNull: false,
         validate: { isUrl: true },
       },
       continent: {

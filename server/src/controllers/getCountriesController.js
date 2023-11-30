@@ -5,26 +5,41 @@ const { Op } = require("sequelize");
 
 module.exports = async (req, res) => {
   const { name } = req.query;
-  console.log(name);
+  const atributesToInclude = [
+    "id",
+    "name",
+    "nameCommon",
+    "flag",
+    "continent",
+    "coatOfArms",
+  ];
   try {
-    let countries = "";
+    let countries = {};
     if (name) {
       countries = await Country.findAll({
-        attributes: ["id", "name", "flag"],
+        attributes: atributesToInclude,
         where: {
-          name: {
-            [Op.iLike]: `%${name}%`,
-          },
+          [Op.or]: [
+            {
+              name: {
+                [Op.iLike]: `%${name}%`,
+              },
+            },
+            {
+              nameCommon: {
+                [Op.iLike]: `%${name}%`,
+              },
+            },
+          ],
         },
         order: [["name", "ASC"]], //ORDENAR
       });
-      console.log({ countries });
       if (!countries.length) {
         return res.status(404).json({ error: "Country Not Found" });
       }
     } else {
       countries = await Country.findAll({
-        attributes: ["id", "name", "flag"],
+        attributes: atributesToInclude,
         // include: [
         //   {
         //     model: Activity,
@@ -42,7 +57,6 @@ module.exports = async (req, res) => {
         order: [["name", "ASC"]], //ORDENAR
       });
     }
-
     res.status(200).json({ countries });
   } catch (error) {
     res.status(500).json({ error: error.message });
