@@ -12,6 +12,7 @@ export const searchCountries = (name) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endPoint + nameToSearch);
+      // console.log("vvvvvvvvvvvvvvvvvvvvv", data[0]);
       return dispatch({
         type: SEARCH_COUNTRIES,
         payload: data.countries,

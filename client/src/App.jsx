@@ -1,9 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import Landing from "./views/landing";
-import Home from "./views/home";
-import Error404 from "./views/error404";
+import Landing from "./Views/Landing/Landing";
+import Home from "./Views/Home/Home";
+import Error404 from "./Views/Error404/Error404";
 
 function App() {
   return (

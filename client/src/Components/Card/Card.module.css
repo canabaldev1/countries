@@ -1,0 +1,19 @@
+.container {
+  border: 1px red solid;
+}
+
+.flagImage {
+  height: 100px;
+  width: 150px;
+  background-size: cover;
+  border: 1px red solid;
+  object-fit: cover;
+}
+
+.coatOfArmsImage {
+  height: 100px;
+  width: 150px;
+  background-size: cover;
+  border: 1px red solid;
+  object-fit: contain;
+}
