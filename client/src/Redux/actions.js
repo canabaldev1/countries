@@ -2,6 +2,7 @@ import axios from "axios";
 
 // ACCIONES
 export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
+export const EMPTY_COUNTRIES = "EMPTY_COUNTRIES";
 
 // funciones para el rerducer
 export const searchCountries = (name) => {
@@ -18,7 +19,13 @@ export const searchCountries = (name) => {
         payload: data.countries,
       });
     } catch (error) {
-      console.log(error.message);
+      console.log("XXXXXXXXXXXXXXXXXXX");
+      console.log(error.data);
+
+      return dispatch({
+        type: EMPTY_COUNTRIES,
+        // payload: data.countries,
+      });
     }
   };
 };

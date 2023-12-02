@@ -3,19 +3,21 @@
 }
 
 .container {
-  border: 1px red solid;
+  border: 1px yellowgreen solid;
   background-color: black;
   position: relative;
-  width: 300px;
+  width: 100%;
+  /* max-width: 500px; */
   aspect-ratio: 1;
   perspective: 500px;
+  /* overflow: hidden; */
 }
 
 .flagImage {
   width: 100%;
   aspect-ratio: 3/2;
   background-size: cover;
-  border: 1px red solid;
+  /* border: 1px red solid; */
   object-fit: cover;
   position: absolute;
   right: 0;
@@ -25,24 +27,97 @@
   /* transform-origin: top right; */
   transition: transform 0.2s linear;
   border-radius: 10px;
+  /* display: none; */
 }
 
 .container:hover .flagImage {
   transform: translate(0, 50%) rotateX(90deg);
 }
+.container:hover {
+  z-index: 1;
+}
 
 .coatOfArmsImage {
-  height: 100px;
-  width: 150px;
+  height: 60%;
+  width: 75%;
   background-size: cover;
-  border: 1px red solid;
+  /* border: 1px red solid; */
   object-fit: contain;
-  transform: translateZ(10px);
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  transition: all 0.2s linear;
+  /* transform: translateZ(10px); */
+  /* display: none; */
+}
+
+.coatOfArmsContainer {
+  overflow: hidden;
+  /* border: 1px blueviolet solid; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container:hover .coatOfArmsImage {
+  transform: translate(-50%, 35%);
+  z-index: 1;
+  animation: movement 3s ease-in-out infinite;
+}
+
+@keyframes movement {
+  0% {
+    transform: translate(-50%, 35%);
+  }
+  50% {
+    transform: translate(-50%, 28%);
+  }
+  100% {
+    transform: translate(-50%, 35%);
+  }
+}
+
+.nameCommonContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 16%;
+  /* border: 1px yellowgreen solid; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* display: none; */
+}
+
+.nameCommonContainer h3 {
+  margin: auto;
+}
+
+.name {
   display: none;
 }
 
-.nameCommon {
+.continentContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 16%;
+  /* border: 1px yellowgreen solid; */
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* display: none; */
 }
-.continent .name {
-  display: none;
+
+.continentContainer h3 {
+  margin: auto;
 }

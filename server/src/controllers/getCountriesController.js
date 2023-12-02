@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
     "coatOfArms",
   ];
   try {
-    let countries = {};
+    let countries = [];
     if (name) {
       countries = await Country.findAll({
         attributes: atributesToInclude,

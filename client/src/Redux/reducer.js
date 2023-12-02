@@ -1,4 +1,4 @@
-import { SEARCH_COUNTRIES } from "./actions";
+import { EMPTY_COUNTRIES, SEARCH_COUNTRIES } from "./actions";
 
 const initialState = {
   countries: [],
@@ -11,6 +11,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload,
+      };
+
+    case EMPTY_COUNTRIES:
+      return {
+        ...state,
+        countries: [],
       };
 
     default:
