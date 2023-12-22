@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import { useDebounce } from "../../assets/customHooks";
 
-function Cards({ searchName }) {
+function Cards({ searchName, page, setPage }) {
   const dispatch = useDispatch();
   const [isCountry, setIsCountry] = useState(false);
 
@@ -15,19 +15,28 @@ function Cards({ searchName }) {
 
   useEffect(() => {
     dispatch(searchCountries(name));
+    setPage(1);
   }, [name]);
 
   const countries = useSelector((state) => state.countries);
+  const countriesToShow = useSelector((state) => state.countriesToShow);
+
+  // console.log(countriesToShow);
+
+  const [countriesToMap, setCountriesToMap] = useState([]);
 
   useEffect(() => {
-    setIsCountry(Boolean(countries.length));
-  }, [countries]);
+    const length = 10;
+    setCountriesToMap(
+      countriesToShow.slice((page - 1) * length, page * length)
+    );
+  }, [countriesToShow, page, length]);
 
   return (
     <div className={styles.container}>
-      {isCountry ? (
+      {countries.length ? (
         <div className={styles.countryContainer}>
-          {countries.map((country) => {
+          {countriesToMap.map((country) => {
             return (
               <Card
                 key={`card${country.id}`}

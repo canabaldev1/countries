@@ -17,6 +17,15 @@ module.exports = async (req, res) => {
     let countries = [];
     if (name) {
       countries = await Country.findAll({
+        include: [
+          {
+            model: Activity,
+            attributes: ["name", "difficulty", "duration"],
+            through: {
+              attributes: [], // revisar el comportamiento de esta propiedad
+            },
+          },
+        ],
         attributes: atributesToInclude,
         where: {
           [Op.or]: [

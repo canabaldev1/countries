@@ -3,6 +3,7 @@ import axios from "axios";
 // ACCIONES
 export const SEARCH_COUNTRIES = "SEARCH_COUNTRIES";
 export const EMPTY_COUNTRIES = "EMPTY_COUNTRIES";
+export const FILTER = "FILTER";
 
 // funciones para el rerducer
 export const searchCountries = (name) => {
@@ -24,5 +25,12 @@ export const searchCountries = (name) => {
         type: EMPTY_COUNTRIES,
       });
     }
+  };
+};
+
+export const filterCountries = (filterData) => {
+  return {
+    type: FILTER,
+    payload: filterData,
   };
 };

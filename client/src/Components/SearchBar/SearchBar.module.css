@@ -1,0 +1,7 @@
+.container {
+  border: 1px red solid;
+}
+
+.filterContainer {
+  display: flex;
+}
