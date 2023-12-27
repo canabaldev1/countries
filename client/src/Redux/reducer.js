@@ -35,13 +35,32 @@ const rootReducer = (state = initialState, action) => {
 
       filteredCountries = continents.length
         ? filteredCountries.filter((country) =>
-            continents.some((c) => c === country.continent)
+            continents.some((country) => country === country.continent)
           )
         : filteredCountries;
 
       filteredCountries = activities.length
-        ? filteredCountries.filter((country) =>
-            activities.some((c) => c === country.activities)
+        ? filteredCountries.filter(
+            (country) => {
+              // console.log(country);
+              console.log(activities);
+              const activitiesOfCountry = country.Activities.map(
+                (act) => act.name
+              );
+              console.log(activitiesOfCountry);
+
+              return activities.some((act) =>
+                activitiesOfCountry.includes(act)
+              );
+            }
+
+            // activities.some((activity) => {
+            //   console.log(activity);
+            //   console.log(country);
+            //   console.log(country.Activities);
+
+            //   return activity === country.Activities.name;
+            // })
           )
         : filteredCountries;
 

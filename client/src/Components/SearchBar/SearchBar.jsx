@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./SearchBar.module.css";
 import { useDispatch } from "react-redux";
 import { filterCountries } from "../../Redux/actions.js";
+import axios from "axios";
 
 function SearchBar({ searchName, setSearchName }) {
   const dispatch = useDispatch();
+
+  const [activities, setActivities] = useState([]);
 
   const handleSearchName = (event) => {
     const name = event.target.value;
@@ -29,8 +32,9 @@ function SearchBar({ searchName, setSearchName }) {
   });
 
   const handleFilter = (event) => {
-    console.log("ejecuta handle Filter");
+    // console.log("ejecuta handle Filter");
     var temporalFilters = { ...filterData };
+    // console.log(temporalFilters);
 
     switch (event.target.name) {
       case "order":
@@ -80,13 +84,24 @@ function SearchBar({ searchName, setSearchName }) {
         break;
     }
 
-    console.log(temporalFilters);
+    // console.log(temporalFilters);
     setFilterData(temporalFilters);
 
     dispatch(filterCountries(temporalFilters));
   };
 
-  const activities = ["actividad 1", "actividad 2", "actividad 3"];
+  // const activities = ["actividad 1", "actividad 2", "actividad 3"];
+
+  const fetchActivities = async () => {
+    const endPoint = "http://localhost:3001/activity";
+    const { data } = await axios(endPoint);
+    // console.log(data.activities);
+    setActivities(data.activities);
+  };
+
+  useEffect(() => {
+    fetchActivities();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -153,18 +168,18 @@ function SearchBar({ searchName, setSearchName }) {
               <div>
                 <input
                   type="checkbox"
-                  id={a}
+                  id={a.id}
                   name="activities"
-                  value={a}
+                  value={a.name}
                   onChange={handleFilter}
                 />
-                <label htmlFor={a}>{a}</label>
+                <label htmlFor={a.id}>{a.name}</label>
               </div>
             );
           })}
         </fieldset>
 
-        <fieldset key="fieldPopulation">
+        {/* <fieldset key="fieldPopulation">
           <legend>Population:</legend>
 
           <div>
@@ -187,7 +202,7 @@ function SearchBar({ searchName, setSearchName }) {
               onChange={handleFilter}
             />
           </div>
-        </fieldset>
+        </fieldset> */}
       </div>
     </div>
   );

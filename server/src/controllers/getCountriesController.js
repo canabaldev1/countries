@@ -1,5 +1,5 @@
 const { Country } = require("../db");
-// const { Activity } = require("../db");
+const { Activity } = require("../db");
 // const { CountryName } = require("../db");
 const { Op } = require("sequelize");
 
@@ -18,14 +18,13 @@ module.exports = async (req, res) => {
     if (name) {
       countries = await Country.findAll({
         include: [
-          // no es necesario incluir informacion de actividades porque esto es para mostrar en las cards
-          // {
-          //   model: Activity,
-          //   attributes: ["id", "name", "difficulty", "duration"],
-          //   through: {
-          //     attributes: [], // revisar el comportamiento de esta propiedad
-          //   },
-          // },
+          {
+            model: Activity,
+            attributes: ["id", "name", "difficulty", "duration"],
+            through: {
+              attributes: [], // revisar el comportamiento de esta propiedad
+            },
+          },
         ],
         attributes: atributesToInclude,
         where: {
@@ -51,14 +50,13 @@ module.exports = async (req, res) => {
       countries = await Country.findAll({
         attributes: atributesToInclude,
         include: [
-          // no es necesario incluir informacion de actividades porque esto es para mostrar en las cards
-          // {
-          //   model: Activity,
-          //   attributes: ["id", "name", "difficulty", "duration"],
-          //   through: {
-          //     attributes: [], // revisar el comportamiento de esta propiedad
-          //   },
-          // },
+          {
+            model: Activity,
+            attributes: ["id", "name", "difficulty", "duration"],
+            through: {
+              attributes: [], // revisar el comportamiento de esta propiedad
+            },
+          },
           //   {
           //     model: CountryName,
           //     as: "names",

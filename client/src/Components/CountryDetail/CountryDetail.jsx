@@ -15,6 +15,7 @@ function CountryDetail() {
         const { data } = await axios(ENDPOINT + id);
         const { country } = data;
         setCountry(country);
+        console.log(country.Activities);
       } catch (error) {}
     };
     fetchCountry();
@@ -53,8 +54,8 @@ function CountryDetail() {
                 style: "decimal",
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-              }).format(country.area)}{" "}
-              m2{" "}
+              }).format(country.area)}
+              {" m2"}
             </span>
           </p>
           <p className={styles.line}>
@@ -63,14 +64,19 @@ function CountryDetail() {
               {" "}
               {new Intl.NumberFormat("en", {
                 style: "decimal",
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
               }).format(country.population)}
             </span>
+            {" people"}
           </p>
           <p className={styles.line}>
             Activities:{" "}
-            <span>{new Intl.ListFormat("en").format(country.Activities)}</span>
+            <span>
+              {new Intl.ListFormat("en-GB").format(
+                country.Activities.map((act) => act.name)
+              )}
+            </span>
           </p>
           <p className={styles.line}></p>
           <img src={country.flag} alt={`flag of ${country.name}`} />
