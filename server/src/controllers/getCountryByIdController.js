@@ -1,6 +1,4 @@
-const { Country } = require("../db");
-const { Activity } = require("../db");
-const { CountryName } = require("../db");
+const { Country, Activity, CountryName } = require("../db");
 
 module.exports = async (req, res) => {
   try {
@@ -11,7 +9,7 @@ module.exports = async (req, res) => {
       include: [
         {
           model: Activity,
-          attributes: ["name", "difficulty", "duration"],
+          attributes: ["id", "name", "difficulty", "duration"],
           through: {
             attributes: [], // revisar el comportamiento de esta propiedad
           },

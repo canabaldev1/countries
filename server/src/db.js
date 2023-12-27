@@ -8,6 +8,7 @@ const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 const countryFunction = require("./models/Country");
 const activityFunction = require("./models/Activity");
 const countryNameFunction = require("./models/CountryName");
+const country_activityFunction = require("./models/country_activity");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`,
@@ -43,16 +44,23 @@ sequelize.models = Object.fromEntries(capsEntries);
 countryFunction(sequelize);
 activityFunction(sequelize);
 countryNameFunction(sequelize);
+country_activityFunction(sequelize);
 
 // Y AQUI SE EXTRAEN
 
-const { Country, Activity, CountryName } = sequelize.models;
+const { Country, Activity, CountryName, country_activity } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Country.belongsToMany(Activity, { through: "country_activity" });
-Activity.belongsToMany(Country, { through: "country_activity" });
+Country.belongsToMany(Activity, {
+  through: country_activity,
+  foreignKey: "CountryId",
+});
+Activity.belongsToMany(Country, {
+  through: country_activity,
+  foreignKey: "ActivityId",
+});
 
 Country.hasMany(CountryName, { as: "names", foreignKey: "countryId" });
 CountryName.belongsTo(Country, { foreignKey: "countryId" });

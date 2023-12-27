@@ -37,7 +37,13 @@ const fetchAllData = async () => {
     });
 
     const languages = data.map((country) => {
+      // extraer de la propiedad translations todos los valores
+
+      // con Object.entries(country.translations) creo un array de arrays, el primer valor es el idioma en el que esta el nombre y el segundo es un objeto con los nombres
+
       return Object.entries(country.translations).map((name) => {
+        // devuelvo un objeto con el id del pais, el idioma en el que voy a dar el nombre, y los nombres en ese idioma, oficial y comun. Falta hacerle flat() porque ahora mismo son un array de array de objetos, y necesito que sean un array de objetos para hacer el bulk create
+
         return {
           countryId: country.cioc || country.cca3,
           languageId: name[0],

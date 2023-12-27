@@ -7,7 +7,6 @@ import { useDebounce } from "../../assets/customHooks";
 
 function Cards({ searchName, page, setPage }) {
   const dispatch = useDispatch();
-  const [isCountry, setIsCountry] = useState(false);
 
   // custom hook - Demorar la peticion.
   // el valor de name se asigna 1 segundo DESPUES de que cambia el valor de searchName.

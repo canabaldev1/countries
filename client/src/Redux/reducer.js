@@ -1,4 +1,9 @@
-import { EMPTY_COUNTRIES, SEARCH_COUNTRIES, FILTER } from "./actions";
+import {
+  EMPTY_COUNTRIES,
+  SEARCH_COUNTRIES,
+  FILTER,
+  ADD_ACTIVITY,
+} from "./actions";
 
 const initialState = {
   countries: [],
@@ -47,6 +52,9 @@ const rootReducer = (state = initialState, action) => {
       }
 
       return { ...state, countriesToShow: filteredCountries };
+
+    case ADD_ACTIVITY:
+      return { ...state };
 
     default:
       return { ...state };

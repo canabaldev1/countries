@@ -1,0 +1,11 @@
+.countryTag {
+  border: 1px white solid;
+  margin: 5px;
+  padding: 3px;
+}
+
+.countryTagContainer {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+}
