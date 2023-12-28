@@ -32,10 +32,10 @@ const rootReducer = (state = initialState, action) => {
       const { order, continents, activities } = filterData;
 
       let filteredCountries = [...state.countries];
-
+      // console.log(continents);
       filteredCountries = continents.length
         ? filteredCountries.filter((country) =>
-            continents.some((country) => country === country.continent)
+            continents.some((continent) => continent === country.continent)
           )
         : filteredCountries;
 

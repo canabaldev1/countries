@@ -20,8 +20,6 @@ function Cards({ searchName, page, setPage }) {
   const countries = useSelector((state) => state.countries);
   const countriesToShow = useSelector((state) => state.countriesToShow);
 
-  console.log(countriesToShow);
-
   const [countriesToMap, setCountriesToMap] = useState([]);
 
   useEffect(() => {

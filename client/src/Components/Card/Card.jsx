@@ -5,8 +5,19 @@ import { Link } from "react-router-dom";
 function Card({ id, name, nameCommon, flag, continent, coatOfArms }) {
   // console.log(coatOfArms);
 
+  const randomNumber = Math.random();
+  console.log(randomNumber);
+
+  let classContainer = "";
+
+  if (randomNumber > 0.9) {
+    classContainer = `${styles.container} ${styles.containerLarger}`;
+  } else {
+    classContainer = `${styles.container}`;
+  }
+
   return (
-    <Link to={`/detail/${id}`} className={styles.container}>
+    <Link to={`/detail/${id}`} className={classContainer}>
       {/* <h2>{id}</h2> */}
       <div className={styles.nameContainer}>
         <h3 className={styles.name}>{name}</h3>

@@ -28,12 +28,12 @@ function NewActivities() {
 
   const handleSearchName = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
+    // console.log(event.target.value);
     setSearchName(event.target.value);
   };
 
-  // console.log(countries);
-  // console.log("Probando");
+  // // console.log(countries);
+  // // console.log("Probando");
 
   // Reunir informacion de la actividad y su creacion
 
@@ -49,7 +49,7 @@ function NewActivities() {
     const key = event.target.name;
     const value = event.target.value;
     const newActivity = { ...activity, [key]: value };
-    console.log(newActivity);
+    // console.log(newActivity);
     setActivity(newActivity);
   };
 
@@ -70,11 +70,11 @@ function NewActivities() {
         { id, name, nameCommon: namecommon },
       ];
     }
-    console.log(stateCountries);
+    // console.log(stateCountries);
 
     setActivity({ ...activity, countries: stateCountries });
 
-    console.log(activity);
+    // console.log(activity);
   };
 
   const handleSubmit = (event) => {
@@ -83,7 +83,7 @@ function NewActivities() {
       ...activity,
       countries: activity.countries.map((country) => country.id),
     };
-    console.log(activityParams);
+    // console.log(activityParams);
     activityParams = dispatch(addActivity(activityParams));
 
     setActivity({
@@ -168,7 +168,7 @@ function NewActivities() {
         />
         <div className={styles.countryTagContainer}>
           {countries.map((country) => {
-            // console.log(country);
+            // // console.log(country);
             return (
               <button
                 onClick={handleClickOnCountries}
