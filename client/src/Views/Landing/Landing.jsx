@@ -1,18 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import style from "./Landing.module.css";
+import LandingButton from "../../Components/LandingButton/LandingButton";
 
 function Landing(params) {
   return (
-    <div>
-      <Link to="/home">
-        <button
-          onClick={(e) => {
-            // e.preventDefault();
-          }}
-        >
-          HOME
-        </button>
-      </Link>
+    <div className={style.container}>
+      <LandingButton />
     </div>
   );
 }

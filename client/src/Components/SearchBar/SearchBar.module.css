@@ -5,3 +5,7 @@
 .filterContainer {
   display: flex;
 }
+
+.filterNoShow {
+  background-color: aqua;
+}

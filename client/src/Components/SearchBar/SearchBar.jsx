@@ -103,6 +103,18 @@ function SearchBar({ searchName, setSearchName }) {
     fetchActivities();
   }, []);
 
+  const filterContainerShow = styles.filterContainer;
+  const filterContainerNoShow = `${styles.filterContainer} ${styles.filterNoShow}`;
+  const [filterContainer, setFilterContainer] = useState(filterContainerShow);
+
+  const handleDisplayFiltetrs = (event) => {
+    event.preventDefault();
+    filterContainer === filterContainerShow
+      ? setFilterContainer(filterContainerNoShow)
+      : setFilterContainer(filterContainerShow);
+    console.log("XXXX");
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.searchByName}>
@@ -114,8 +126,9 @@ function SearchBar({ searchName, setSearchName }) {
           className={styles.searchName}
           type="text"
         />
+        <button onClick={handleDisplayFiltetrs}>A</button>
       </div>
-      <div className={styles.filterContainer}>
+      <div className={filterContainer}>
         <fieldset key="fieldOrder">
           <legend>Order:</legend>
 

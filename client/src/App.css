@@ -1,8 +1,31 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-  /* border: 1px green solid; */
-  width: 100%;
+  width: 100%;} */
+
+@import url("https://fonts.googleapis.com/css2?family=Bellota+Text:wght@400;700&family=Lobster&display=swap");
+/* font-family: 'Lobster', sans-serif;
+font-family: 'Titillium Web', sans-serif; */
+
+* {
+  font-family: "Bellota Text", sans-serif;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h2 {
+  font-family: "Lobster", sans-serif;
+}
+
+/* VARIABLES */
+
+:root {
+  --first-color: gray;
+  --second-color: white;
+  --third-color: black;
+  --fourth-color: red;
 }
