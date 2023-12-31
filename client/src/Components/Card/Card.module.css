@@ -167,3 +167,10 @@
 .container:hover .continentContainer {
   opacity: 0;
 }
+
+@media screen and (max-width: 500px) {
+  .containerLarger {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}

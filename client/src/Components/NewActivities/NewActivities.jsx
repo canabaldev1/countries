@@ -13,6 +13,7 @@ function NewActivities() {
 
   const [searchName, setSearchName] = useState("");
   const dispatch = useDispatch();
+  const [showNotification, setShowNotification] = useState(false);
 
   name = useDebounce(searchName, 500);
 
@@ -77,14 +78,24 @@ function NewActivities() {
     // console.log(activity);
   };
 
-  const handleSubmit = (event) => {
+  const handleClose = () => {
+    setShowNotification(false);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     let activityParams = {
       ...activity,
       countries: activity.countries.map((country) => country.id),
     };
     // console.log(activityParams);
-    activityParams = dispatch(addActivity(activityParams));
+    activityParams = await dispatch(addActivity(activityParams));
+
+    if (activityParams) {
+      setShowNotification(true);
+    }
+
+    console.log(activityParams);
 
     setActivity({
       name: "",
@@ -97,111 +108,135 @@ function NewActivities() {
   };
 
   return (
-    <form className={styles.container}>
-      <div>
-        <label htmlFor="name">Name</label>
-        <input
-          onChange={handleActivityParameters}
-          type="text"
-          id="name"
-          name="name"
-          autoComplete="off"
-          value={activity.name}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="difficulty">Difficulty</label>
+    <div>
+      <form className={styles.container}>
+        <div className={styles.optionContainer}>
+          <label htmlFor="name">Name</label>
+          <input
+            onChange={handleActivityParameters}
+            type="text"
+            id="name"
+            name="name"
+            autoComplete="off"
+            value={activity.name}
+            required
+          />
+        </div>
+        <div className={styles.optionContainer}>
+          <label htmlFor="difficulty">Difficulty</label>
 
-        <select
-          onChange={handleActivityParameters}
-          name="difficulty"
-          id="difficulty"
-          value={activity.difficulty}
-          required
-        >
-          {["", 1, 2, 3, 4, 5].map((n) => {
-            return (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="duration">Duration</label>
-        <input
-          onChange={handleActivityParameters}
-          type="number"
-          id="duration"
-          name="duration"
-          required
-          value={activity.duration}
-        />
-      </div>
-      <div>
-        <label htmlFor="season">Season</label>
-        <select
-          onChange={handleActivityParameters}
-          id="season"
-          name="season"
-          value={activity.season}
-        >
-          {["", "Summer", "Fall", "Winter", "Spring"].map((n) => {
-            return (
-              <option key={n} value={n}>
-                {n}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <div>
-        <label htmlFor="countries">Countries</label>
-        <input
-          type="text"
-          id="Name"
-          name="Name"
-          onChange={handleSearchName}
-          value={searchName}
-        />
-        <div className={styles.countryTagContainer}>
-          {countries.map((country) => {
-            // // console.log(country);
-            return (
-              <button
-                onClick={handleClickOnCountries}
-                className={styles.countryTag}
-                id={country.id}
-                key={`search${country.id}`}
-                name={country.name}
-                data-namecommon={country.nameCommon}
-              >
-                {country.nameCommon}
-              </button>
-            );
-          })}
+          <select
+            onChange={handleActivityParameters}
+            name="difficulty"
+            id="difficulty"
+            value={activity.difficulty}
+            required
+          >
+            {["", 1, 2, 3, 4, 5].map((n) => {
+              return (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              );
+            })}
+          </select>
         </div>
-        <div className={styles.countryTagContainer}>
-          {activity.countries.map((country) => {
-            return (
-              <button
-                onClick={handleClickOnCountries}
-                className={styles.countryTag}
-                id={country.id}
-                key={`search${country.id}`}
-                name={country.name}
-                data-namecommon={country.nameCommon}
-              >
-                {country.nameCommon ? country.nameCommon : ""}
-              </button>
-            );
-          })}
+        <div className={styles.optionContainer}>
+          <label htmlFor="duration">Duration</label>
+          <input
+            onChange={handleActivityParameters}
+            type="number"
+            id="duration"
+            name="duration"
+            required
+            value={activity.duration}
+          />
         </div>
-      </div>
-      <button onClick={handleSubmit}>Create activity</button>
-    </form>
+        <div className={styles.optionContainer}>
+          <label htmlFor="season">Season</label>
+          <select
+            onChange={handleActivityParameters}
+            id="season"
+            name="season"
+            value={activity.season}
+          >
+            {["", "Summer", "Fall", "Winter", "Spring"].map((n) => {
+              return (
+                <option key={n} value={n}>
+                  {n}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className={styles.optionContainer}>
+          <label htmlFor="countries">Countries</label>
+          <input
+            type="text"
+            id="countries"
+            name="countries"
+            onChange={handleSearchName}
+            value={searchName}
+          />
+
+          <label className={styles.countryLabels}>
+            Countries searched <span>Click to add</span>
+          </label>
+          <div className={styles.countryTagContainer}>
+            {countries.map((country) => {
+              // // console.log(country);
+              return (
+                <button
+                  onClick={handleClickOnCountries}
+                  className={styles.countryTag}
+                  id={country.id}
+                  key={`search${country.id}`}
+                  name={country.name}
+                  data-namecommon={country.nameCommon}
+                >
+                  {country.nameCommon}
+                </button>
+              );
+            })}
+          </div>
+
+          {activity.countries.length ? (
+            <label className={styles.countryLabels}>
+              Countries selected <span>Click to remove</span>
+            </label>
+          ) : (
+            ""
+          )}
+          {activity.countries.length ? (
+            <div className={styles.countryTagContainer}>
+              {activity.countries.map((country) => {
+                return (
+                  <button
+                    onClick={handleClickOnCountries}
+                    className={styles.countryTag}
+                    id={country.id}
+                    key={`search${country.id}`}
+                    name={country.name}
+                    data-namecommon={country.nameCommon}
+                  >
+                    {country.nameCommon ? country.nameCommon : ""}
+                  </button>
+                );
+              })}
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
+        <button onClick={handleSubmit}>Create activity</button>
+      </form>
+      {showNotification && (
+        <div className={styles.notification}>
+          <p>ACTIVITY SUCCESSFULLY CREATED</p>
+          <button onClick={handleClose}>Close</button>
+        </div>
+      )}
+    </div>
   );
 }
 

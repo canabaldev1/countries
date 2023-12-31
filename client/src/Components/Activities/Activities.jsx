@@ -16,12 +16,12 @@ function Activities() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {activities.length
         ? activities.map((act) => {
             console.log(act);
             return (
-              <div>
+              <div className={styles.activityContainer}>
                 <p className={styles.line}>
                   ID: <span> {act.id} </span>
                 </p>

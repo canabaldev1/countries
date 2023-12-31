@@ -3,10 +3,7 @@ import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
 
 function Card({ id, name, nameCommon, flag, continent, coatOfArms }) {
-  // console.log(coatOfArms);
-
   const randomNumber = Math.random();
-  console.log(randomNumber);
 
   let classContainer = "";
 

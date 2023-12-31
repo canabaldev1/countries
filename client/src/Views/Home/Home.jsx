@@ -11,7 +11,6 @@ function Home(params) {
   return (
     <div className={styles.container}>
       <NavBar />
-      <p>aqui empieza el home</p>
       <SearchBar searchName={searchName} setSearchName={setSearchName} />
       <Cards searchName={searchName} setPage={setPage} page={page} />
       <PageBar setPage={setPage} page={page} />

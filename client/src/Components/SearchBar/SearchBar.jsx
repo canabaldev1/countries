@@ -108,16 +108,14 @@ function SearchBar({ searchName, setSearchName }) {
   const [filterContainer, setFilterContainer] = useState(filterContainerShow);
 
   const handleDisplayFiltetrs = (event) => {
-    event.preventDefault();
     filterContainer === filterContainerShow
       ? setFilterContainer(filterContainerNoShow)
       : setFilterContainer(filterContainerShow);
-    console.log("XXXX");
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.searchByName}>
+      <div className={styles.searchContainer}>
         <label htmlFor="searchName">Search: </label>
         <input
           value={searchName}
@@ -126,37 +124,44 @@ function SearchBar({ searchName, setSearchName }) {
           className={styles.searchName}
           type="text"
         />
-        <button onClick={handleDisplayFiltetrs}>A</button>
+        <label className={styles.burger} htmlFor="burger">
+          <input type="checkbox" id="burger" onClick={handleDisplayFiltetrs} />
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
       </div>
       <div className={filterContainer}>
-        <fieldset key="fieldOrder">
+        <fieldset key="fieldOrder" className={styles.field}>
           <legend>Order:</legend>
 
           <div>
             <input
               type="radio"
               id="ascending"
+              key="ascending"
               name="order"
               value="ascending"
               checked={filterData.order === "ascending"}
               onChange={handleFilter}
             />
-            <label htmlFor="ascending">ascending</label>
+            <label htmlFor="ascending">Ascending</label>
           </div>
           <div>
             <input
               type="radio"
               id="descending"
+              key="descending"
               name="order"
               value="descending"
               checked={filterData.order === "descending"}
               onChange={handleFilter}
             />
-            <label htmlFor="descending">descending</label>
+            <label htmlFor="descending">Descending</label>
           </div>
         </fieldset>
 
-        <fieldset key="fieldContinent">
+        <fieldset key="fieldContinent" className={styles.field}>
           <legend>Continent:</legend>
           {CONTINENTS.map((c) => {
             return (
@@ -164,17 +169,20 @@ function SearchBar({ searchName, setSearchName }) {
                 <input
                   type="checkbox"
                   id={c}
+                  key={`input${c}`}
                   name="continents"
                   value={c}
                   onChange={handleFilter}
                 />
-                <label htmlFor={c}>{c}</label>
+                <label key={`label${c}`} htmlFor={c}>
+                  {c}
+                </label>
               </div>
             );
           })}
         </fieldset>
 
-        <fieldset key="fieldActivities">
+        <fieldset key="fieldActivities" className={styles.field}>
           <legend>Activities:</legend>
           {activities.map((a) => {
             return (
@@ -182,6 +190,7 @@ function SearchBar({ searchName, setSearchName }) {
                 <input
                   type="checkbox"
                   id={a.id}
+                  key={a.id}
                   name="activities"
                   value={a.name}
                   onChange={handleFilter}

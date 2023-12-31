@@ -1,11 +1,113 @@
 .container {
+  margin-top: 130px;
   border: 1px red solid;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 15px;
+  min-width: 300px;
 }
 
 .filterContainer {
+  position: relative;
   display: flex;
+  gap: 10px;
+  transition: all 0.3s ease-in-out;
+  /* margin-top: 200px; */
 }
 
 .filterNoShow {
-  background-color: aqua;
+  /* background-color: aqua; */
+  transform: translateY(-200%);
+  z-index: -1;
+  height: 0;
+}
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchName {
+  border-radius: 20px;
+  height: 30px;
+  margin: 5px 5px;
+  width: 200px;
+  padding: 0 5px;
+}
+
+.burger {
+  position: relative;
+  width: 40px;
+  height: 30px;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+  scale: 0.6;
+}
+
+.burger input {
+  display: none;
+}
+
+.burger span {
+  display: block;
+  position: absolute;
+  height: 4px;
+  width: 100%;
+  background: black;
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+  top: 0px;
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+  top: 100%;
+  transform-origin: left center;
+  transform: translateY(-100%);
+}
+
+.burger input:checked ~ span:nth-of-type(1) {
+  transform: rotate(45deg);
+  top: 0px;
+  left: 5px;
+}
+
+.burger input:checked ~ span:nth-of-type(2) {
+  width: 0%;
+  opacity: 0;
+}
+
+.burger input:checked ~ span:nth-of-type(3) {
+  transform: rotate(-45deg);
+  top: 28px;
+  left: 5px;
+}
+
+.field {
+  margin: 13px 5px 5px 5px;
+  padding: 10px;
+  border-radius: 15px;
+  height: 100%;
+}
+
+@media screen and (max-width: 500px) {
+  .filterContainer {
+    flex-direction: column;
+  }
 }

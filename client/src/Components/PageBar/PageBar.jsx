@@ -25,6 +25,7 @@ function PageBar({ setPage, page }) {
       {pages.map((p) => {
         return (
           <button
+            key={`keypage${p}`}
             value={p}
             onClick={handleClick}
             className={p === page ? "selectedPage" : "notSelectedPage"}
