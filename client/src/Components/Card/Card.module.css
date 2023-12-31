@@ -1,6 +1,6 @@
 .container {
-  border: 1px yellowgreen solid;
-  background-color: rgb(184, 1, 32);
+  border: 1px var(--secondary) solid;
+  background-color: var(--secondary-t);
   position: relative;
   width: 100%;
   /* max-width: 500px; */
@@ -8,6 +8,7 @@
   perspective: 500px;
   /* overflow: hidden; */
   grid-column: auto;
+  border-radius: 10px;
 }
 
 .containerLarger {
@@ -108,6 +109,7 @@
 .nameCommonContainer h3 {
   margin: auto;
   text-shadow: 2px 2px 4px black;
+  text-align: center;
 }
 
 .nameContainer {
@@ -131,7 +133,8 @@
 .nameContainer h3 {
   margin: auto;
   text-shadow: 2px 2px 10px black;
-  background-color: rgba(184, 1, 31, 0.459);
+  text-align: center;
+  /* background-color: rgba(184, 1, 31, 0.459); */
   /* color: red; */
 }
 
@@ -156,6 +159,7 @@
 .continentContainer h3 {
   margin: auto;
   text-shadow: 2px 2px 4px black;
+  text-align: center;
 }
 
 .container:hover .nameCommonContainer {

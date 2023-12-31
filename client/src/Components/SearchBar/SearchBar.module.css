@@ -1,6 +1,8 @@
 .container {
   margin-top: 130px;
-  border: 1px red solid;
+  margin-bottom: 10px;
+  border: 3px var(--primary) solid;
+  background-color: var(--secondary-t);
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -35,7 +37,7 @@
   height: 30px;
   margin: 5px 5px;
   width: 200px;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 
 .burger {
@@ -104,6 +106,7 @@
   padding: 10px;
   border-radius: 15px;
   height: 100%;
+  border: 2px solid var(--secondary);
 }
 
 @media screen and (max-width: 500px) {

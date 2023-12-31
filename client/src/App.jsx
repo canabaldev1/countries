@@ -10,7 +10,7 @@ import DisplayActivities from "./Views/DisplayActivities/DisplayActivities";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/home" element={<Home />} />

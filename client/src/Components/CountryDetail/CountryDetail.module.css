@@ -14,6 +14,10 @@
   flex-wrap: wrap;
 }
 
+.info {
+  max-width: 420px;
+}
+
 .image {
   width: 400px;
 }
@@ -31,24 +35,32 @@
   width: 400px;
   overflow: hidden;
   position: relative;
+  border: 1px blue solid;
 }
 
 .imgPair {
   position: relative;
-  right: 400px;
+  right: 0px;
   top: 0;
   animation: carousel 7s linear infinite;
+}
+
+.noCoatOfArms {
+  position: relative;
+  right: 0px;
+  top: 0;
+  animation: none;
 }
 
 @keyframes carousel {
   0%,
   45%,
   100% {
-    transform: translateX(-1%);
+    transform: translateX(-100.1%);
   }
 
   50%,
   95% {
-    transform: translateX(101%);
+    transform: translateX(0.1%);
   }
 }

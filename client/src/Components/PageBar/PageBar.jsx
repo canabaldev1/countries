@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import styles from "./PageBar.module.css";
 
 function PageBar({ setPage, page }) {
   const countriesToShow = useSelector((state) => state.countriesToShow);
@@ -21,14 +22,16 @@ function PageBar({ setPage, page }) {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {pages.map((p) => {
         return (
           <button
             key={`keypage${p}`}
             value={p}
             onClick={handleClick}
-            className={p === page ? "selectedPage" : "notSelectedPage"}
+            className={
+              p === page ? styles.selectedPage : styles.notSelectedPage
+            }
           >
             {p}
           </button>

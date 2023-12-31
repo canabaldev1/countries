@@ -7,6 +7,7 @@ import {
   emptySearchCountries,
   addActivity,
 } from "../../Redux/actions";
+import validate from "../../assets/validate";
 
 function NewActivities() {
   // Todo lo necesario para la busqueda de los paises a agregar a las actividades
@@ -46,11 +47,18 @@ function NewActivities() {
     countries: [],
   });
 
+  const [activityError, setActivityError] = useState({});
+
   const handleActivityParameters = (event) => {
     const key = event.target.name;
     const value = event.target.value;
     const newActivity = { ...activity, [key]: value };
-    // console.log(newActivity);
+
+    const currentError = validate(newActivity, setActivityError);
+
+    console.log(Boolean(Object.keys(currentError).length));
+    setIsButtonDisabled(Boolean(Object.keys(currentError).length));
+
     setActivity(newActivity);
   };
 
@@ -73,7 +81,16 @@ function NewActivities() {
     }
     // console.log(stateCountries);
 
-    setActivity({ ...activity, countries: stateCountries });
+    const newActivity = { ...activity, countries: stateCountries };
+
+    const currentError = validate(newActivity, setActivityError);
+
+    // console.log(currentError);
+
+    console.log(Boolean(Object.keys(currentError).length));
+    setIsButtonDisabled(Boolean(Object.keys(currentError).length));
+
+    setActivity(newActivity);
 
     // console.log(activity);
   };
@@ -89,9 +106,11 @@ function NewActivities() {
       countries: activity.countries.map((country) => country.id),
     };
     // console.log(activityParams);
-    activityParams = await dispatch(addActivity(activityParams));
+    const response = await dispatch(addActivity(activityParams));
 
-    if (activityParams) {
+    console.log(response);
+
+    if (response) {
       setShowNotification(true);
     }
 
@@ -107,11 +126,13 @@ function NewActivities() {
     setSearchName("");
   };
 
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+
   return (
-    <div>
-      <form className={styles.container}>
+    <div className={styles.container}>
+      <form className={styles.form}>
         <div className={styles.optionContainer}>
-          <label htmlFor="name">Name</label>
+          <label htmlFor="name">Name of the new activity</label>
           <input
             onChange={handleActivityParameters}
             type="text"
@@ -120,10 +141,13 @@ function NewActivities() {
             autoComplete="off"
             value={activity.name}
             required
+            className={styles.inputs}
           />
         </div>
         <div className={styles.optionContainer}>
-          <label htmlFor="difficulty">Difficulty</label>
+          <label htmlFor="difficulty">
+            Difficulty (where 1 is very easy and 5 is extremely difficult)
+          </label>
 
           <select
             onChange={handleActivityParameters}
@@ -131,6 +155,7 @@ function NewActivities() {
             id="difficulty"
             value={activity.difficulty}
             required
+            className={styles.inputs}
           >
             {["", 1, 2, 3, 4, 5].map((n) => {
               return (
@@ -142,7 +167,7 @@ function NewActivities() {
           </select>
         </div>
         <div className={styles.optionContainer}>
-          <label htmlFor="duration">Duration</label>
+          <label htmlFor="duration">Duration in minutes</label>
           <input
             onChange={handleActivityParameters}
             type="number"
@@ -150,15 +175,18 @@ function NewActivities() {
             name="duration"
             required
             value={activity.duration}
+            min={0}
+            className={styles.inputs}
           />
         </div>
         <div className={styles.optionContainer}>
-          <label htmlFor="season">Season</label>
+          <label htmlFor="season">Season of the year</label>
           <select
             onChange={handleActivityParameters}
             id="season"
             name="season"
             value={activity.season}
+            className={styles.inputs}
           >
             {["", "Summer", "Fall", "Winter", "Spring"].map((n) => {
               return (
@@ -170,13 +198,14 @@ function NewActivities() {
           </select>
         </div>
         <div className={styles.optionContainer}>
-          <label htmlFor="countries">Countries</label>
+          <label htmlFor="countries">Countries where can be done</label>
           <input
             type="text"
             id="countries"
             name="countries"
             onChange={handleSearchName}
             value={searchName}
+            className={styles.inputs}
           />
 
           <label className={styles.countryLabels}>
@@ -228,7 +257,18 @@ function NewActivities() {
             ""
           )}
         </div>
-        <button onClick={handleSubmit}>Create activity</button>
+        <button
+          className={isButtonDisabled ? styles.buttonDisabled : styles.button}
+          disabled={isButtonDisabled}
+          onClick={handleSubmit}
+        >
+          Create activity
+        </button>
+        <div>
+          {Object.keys(activityError).map((key) => (
+            <p key={`ck${key}`}> Error: {activityError[key]}</p>
+          ))}
+        </div>
       </form>
       {showNotification && (
         <div className={styles.notification}>

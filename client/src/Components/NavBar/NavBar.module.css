@@ -7,17 +7,14 @@
   position: fixed;
   right: 0;
   top: 0;
-  background-color: aqua;
   z-index: 10;
   padding: 10px;
   flex-wrap: nowrap;
   min-width: 300px;
-}
-
-.container::after {
-  /* content: ""; */
-  display: block;
-  height: 100px;
+  background-color: var(--primary-t);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--text);
 }
 
 .logo {
@@ -26,7 +23,7 @@
 
 .navList {
   display: flex;
-  color: black;
+  /* color: black; */
   list-style-type: none;
   transition: all 0.3s ease-in-out;
 }
@@ -58,17 +55,24 @@
 
 @media screen and (max-width: 600px) {
   .menuTogle {
-    display: block;
+    display: flex;
   }
 
   .navList {
     position: absolute;
     top: 100%;
     right: -50%;
-    /* width: 300px; */
-    background-color: aqua;
+    background-color: var(--primary);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     flex-direction: column;
     transition: all 0.3s ease-in-out;
+  }
+
+  .navList li {
+    background-color: var(--primary-t);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
 
   .link {

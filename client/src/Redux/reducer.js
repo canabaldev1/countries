@@ -8,7 +8,6 @@ import {
 const initialState = {
   countries: [],
   countriesToShow: [],
-  activities: [],
 };
 
 const rootReducer = (state = initialState, action) => {

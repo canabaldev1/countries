@@ -7,7 +7,8 @@
 }
 
 .activityContainer {
-  border: 1px red solid;
+  border: 3px var(--primary) solid;
+  background-color: var(--secondary-t);
   border-radius: 15px;
   margin: 15px;
   padding: 15px;

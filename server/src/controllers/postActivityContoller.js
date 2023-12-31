@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
 
     newActivity.setCountries(countriesWithActivity);
 
-    res.status(200).json({ newActivity });
+    res.status(200).json({ newActivity, created });
   } catch (error) {
     console.error(error);
     console.error(error);
