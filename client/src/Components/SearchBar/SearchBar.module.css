@@ -107,10 +107,40 @@
   border-radius: 15px;
   height: 100%;
   border: 2px solid var(--secondary);
+  max-height: 200px;
+  overflow: hidden;
+  width: 30dvw;
+  max-width: 200px;
+  min-width: 120px;
+}
+
+.fieldContent {
+  height: 100%; /* Esto asegura que el contenido se expanda al 100% del contenedor */
+  overflow-y: auto;
+}
+
+.fieldContent::-webkit-scrollbar {
+  width: 6px; /* Ancho de la barra de desplazamiento */
+}
+
+.fieldContent::-webkit-scrollbar-thumb {
+  background-color: var(--primary); /* Color del mango (thumb) */
+}
+
+.fieldContent::-webkit-scrollbar-track {
+  background-color: transparent; /* Color de la pista de la barra de desplazamiento */
 }
 
 @media screen and (max-width: 500px) {
   .filterContainer {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+  }
+
+  .field {
+    min-width: 90%;
+    max-width: 90%;
+    width: 90%;
   }
 }

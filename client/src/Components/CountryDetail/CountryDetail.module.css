@@ -31,11 +31,9 @@
 .imgContainer {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   width: 400px;
   overflow: hidden;
   position: relative;
-  border: 1px blue solid;
 }
 
 .imgPair {

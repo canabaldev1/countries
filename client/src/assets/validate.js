@@ -10,7 +10,7 @@ function validate(
   }
 
   if (!name.length) {
-    error.name = "You should pprovide a name";
+    error.name = "You should provide a name";
   }
 
   // Validación para la dificultad

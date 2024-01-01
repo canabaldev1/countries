@@ -5,16 +5,18 @@ import MIlogo from "../../assets/logo.svg";
 
 function LandingButton(params) {
   return (
-    <div className={style.container}>
-      <div className={style.text}>
-        <h3 className={style.subtittle}>Welcome to</h3>
-        <h2 className={style.tittle}>COUNTRY EXPLORER</h2>
-        <h3 className={style.subtittle}>Let's begin our travel together</h3>
-        <Link to="/home" className={style.button}>
-          EXPLORE COUNTRIES
-        </Link>
+    <div className={style.page}>
+      <div className={style.container}>
+        <div className={style.text}>
+          <h3 className={style.subtittle}>Welcome to</h3>
+          <h2 className={style.tittle}>COUNTRY EXPLORER</h2>
+          <h3 className={style.subtittle}>Let's begin our travel together</h3>
+          <Link to="/home" className={style.button}>
+            EXPLORE COUNTRIES
+          </Link>
+        </div>
+        <img src={MIlogo} alt="" />
       </div>
-      <img src={MIlogo} alt="" />
     </div>
   );
 }

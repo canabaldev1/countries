@@ -95,7 +95,6 @@ function CountryDetail() {
           </div>
 
           <div className={styles.imgContainer}>
-            {console.log(country.coatOfArms)}
             {country.coatOfArms ? (
               <div className={styles.imgPair}>
                 <img

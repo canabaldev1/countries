@@ -2,19 +2,18 @@ import React, { useEffect, useState } from "react";
 import styles from "./NewActivities.module.css";
 import { useDebounce } from "../../assets/customHooks";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  searchCountries,
-  emptySearchCountries,
-  addActivity,
-} from "../../Redux/actions";
+import { searchCountries, emptySearchCountries } from "../../Redux/actions";
 import validate from "../../assets/validate";
+import axios from "axios";
 
 function NewActivities() {
   // Todo lo necesario para la busqueda de los paises a agregar a las actividades
 
   const [searchName, setSearchName] = useState("");
   const dispatch = useDispatch();
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const [showNotification, setShowNotification] = useState(false);
+  const [created, setCreated] = useState(false);
 
   name = useDebounce(searchName, 500);
 
@@ -30,12 +29,8 @@ function NewActivities() {
 
   const handleSearchName = (event) => {
     event.preventDefault();
-    // console.log(event.target.value);
     setSearchName(event.target.value);
   };
-
-  // // console.log(countries);
-  // // console.log("Probando");
 
   // Reunir informacion de la actividad y su creacion
 
@@ -56,7 +51,6 @@ function NewActivities() {
 
     const currentError = validate(newActivity, setActivityError);
 
-    console.log(Boolean(Object.keys(currentError).length));
     setIsButtonDisabled(Boolean(Object.keys(currentError).length));
 
     setActivity(newActivity);
@@ -79,20 +73,14 @@ function NewActivities() {
         { id, name, nameCommon: namecommon },
       ];
     }
-    // console.log(stateCountries);
 
     const newActivity = { ...activity, countries: stateCountries };
 
     const currentError = validate(newActivity, setActivityError);
 
-    // console.log(currentError);
-
-    console.log(Boolean(Object.keys(currentError).length));
     setIsButtonDisabled(Boolean(Object.keys(currentError).length));
 
     setActivity(newActivity);
-
-    // console.log(activity);
   };
 
   const handleClose = () => {
@@ -105,16 +93,16 @@ function NewActivities() {
       ...activity,
       countries: activity.countries.map((country) => country.id),
     };
-    // console.log(activityParams);
-    const response = await dispatch(addActivity(activityParams));
+    // const response = await dispatch(addActivity(activityParams));
 
-    console.log(response);
+    const endPoint = "http://localhost:3001/activity";
 
-    if (response) {
+    const { data } = await axios.post(endPoint, activityParams);
+
+    if (data) {
       setShowNotification(true);
+      setCreated(data.created);
     }
-
-    console.log(activityParams);
 
     setActivity({
       name: "",
@@ -125,8 +113,6 @@ function NewActivities() {
     });
     setSearchName("");
   };
-
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
   return (
     <div className={styles.container}>
@@ -213,7 +199,6 @@ function NewActivities() {
           </label>
           <div className={styles.countryTagContainer}>
             {countries.map((country) => {
-              // // console.log(country);
               return (
                 <button
                   onClick={handleClickOnCountries}
@@ -270,12 +255,18 @@ function NewActivities() {
           ))}
         </div>
       </form>
-      {showNotification && (
-        <div className={styles.notification}>
-          <p>ACTIVITY SUCCESSFULLY CREATED</p>
-          <button onClick={handleClose}>Close</button>
-        </div>
-      )}
+      {showNotification &&
+        (created ? (
+          <div className={styles.notification}>
+            <p>ACTIVITY SUCCESSFULLY CREATED</p>
+            <button onClick={handleClose}>Close</button>
+          </div>
+        ) : (
+          <div className={styles.notification}>
+            <p>AN ACTIVITY WITH THIS NAME ALREADY EXISTED</p>
+            <button onClick={handleClose}>Close</button>
+          </div>
+        ))}
     </div>
   );
 }

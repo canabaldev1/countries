@@ -32,9 +32,7 @@ function SearchBar({ searchName, setSearchName }) {
   });
 
   const handleFilter = (event) => {
-    // console.log("ejecuta handle Filter");
     var temporalFilters = { ...filterData };
-    // console.log(temporalFilters);
 
     switch (event.target.name) {
       case "order":
@@ -84,7 +82,6 @@ function SearchBar({ searchName, setSearchName }) {
         break;
     }
 
-    // console.log(temporalFilters);
     setFilterData(temporalFilters);
 
     dispatch(filterCountries(temporalFilters));
@@ -95,7 +92,6 @@ function SearchBar({ searchName, setSearchName }) {
   const fetchActivities = async () => {
     const endPoint = "http://localhost:3001/activity";
     const { data } = await axios(endPoint);
-    // console.log(data.activities);
     setActivities(data.activities);
   };
 
@@ -162,10 +158,10 @@ function SearchBar({ searchName, setSearchName }) {
         </fieldset>
 
         <fieldset key="fieldContinent" className={styles.field}>
-          <legend>Continent:</legend>
+          <legend key="legendContinent">Continent:</legend>
           {CONTINENTS.map((c) => {
             return (
-              <div>
+              <div key={`div${c}`}>
                 <input
                   type="checkbox"
                   id={c}
@@ -184,47 +180,24 @@ function SearchBar({ searchName, setSearchName }) {
 
         <fieldset key="fieldActivities" className={styles.field}>
           <legend>Activities:</legend>
-          {activities.map((a) => {
-            return (
-              <div>
-                <input
-                  type="checkbox"
-                  id={a.id}
-                  key={a.id}
-                  name="activities"
-                  value={a.name}
-                  onChange={handleFilter}
-                />
-                <label htmlFor={a.id}>{a.name}</label>
-              </div>
-            );
-          })}
+          <div className={styles.fieldContent}>
+            {activities.map((a) => {
+              return (
+                <div key={`div${a.id}`}>
+                  <input
+                    type="checkbox"
+                    id={a.id}
+                    key={a.id}
+                    name="activities"
+                    value={a.name}
+                    onChange={handleFilter}
+                  />
+                  <label htmlFor={a.id}>{a.name}</label>
+                </div>
+              );
+            })}
+          </div>
         </fieldset>
-
-        {/* <fieldset key="fieldPopulation">
-          <legend>Population:</legend>
-
-          <div>
-            <label htmlFor="minPopulation">Minimum population</label>
-            <input
-              type="number"
-              id="minPopulation"
-              name="population"
-              min="0"
-              onChange={handleFilter}
-            />
-          </div>
-          <div>
-            <label htmlFor="maxPopulation">Maximum population</label>
-            <input
-              type="number"
-              id="maxPopulation"
-              name="population"
-              min="0"
-              onChange={handleFilter}
-            />
-          </div>
-        </fieldset> */}
       </div>
     </div>
   );

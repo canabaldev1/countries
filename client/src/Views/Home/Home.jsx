@@ -12,8 +12,8 @@ function Home(params) {
     <div className={styles.container}>
       <NavBar />
       <SearchBar searchName={searchName} setSearchName={setSearchName} />
-      <Cards searchName={searchName} setPage={setPage} page={page} />
       <PageBar setPage={setPage} page={page} />
+      <Cards searchName={searchName} setPage={setPage} page={page} />
     </div>
   );
 }

@@ -1,9 +1,4 @@
-import {
-  EMPTY_COUNTRIES,
-  SEARCH_COUNTRIES,
-  FILTER,
-  ADD_ACTIVITY,
-} from "./actions";
+import { EMPTY_COUNTRIES, SEARCH_COUNTRIES, FILTER } from "./actions";
 
 const initialState = {
   countries: [],
@@ -31,7 +26,6 @@ const rootReducer = (state = initialState, action) => {
       const { order, continents, activities } = filterData;
 
       let filteredCountries = [...state.countries];
-      // console.log(continents);
       filteredCountries = continents.length
         ? filteredCountries.filter((country) =>
             continents.some((continent) => continent === country.continent)
@@ -39,28 +33,13 @@ const rootReducer = (state = initialState, action) => {
         : filteredCountries;
 
       filteredCountries = activities.length
-        ? filteredCountries.filter(
-            (country) => {
-              // console.log(country);
-              console.log(activities);
-              const activitiesOfCountry = country.Activities.map(
-                (act) => act.name
-              );
-              console.log(activitiesOfCountry);
+        ? filteredCountries.filter((country) => {
+            const activitiesOfCountry = country.Activities.map(
+              (act) => act.name
+            );
 
-              return activities.some((act) =>
-                activitiesOfCountry.includes(act)
-              );
-            }
-
-            // activities.some((activity) => {
-            //   console.log(activity);
-            //   console.log(country);
-            //   console.log(country.Activities);
-
-            //   return activity === country.Activities.name;
-            // })
-          )
+            return activities.some((act) => activitiesOfCountry.includes(act));
+          })
         : filteredCountries;
 
       if (order === "ascending") {
@@ -70,9 +49,6 @@ const rootReducer = (state = initialState, action) => {
       }
 
       return { ...state, countriesToShow: filteredCountries };
-
-    case ADD_ACTIVITY:
-      return { ...state };
 
     default:
       return { ...state };
