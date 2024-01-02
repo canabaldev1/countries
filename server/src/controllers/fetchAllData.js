@@ -6,7 +6,6 @@ const { Country, CountryName } = require("../db");
 const fetchAllData = async () => {
   try {
     const { data } = await axios(API_URL);
-    // console.log(data[0].name.common);
     const countries = data.map((country) => {
       return {
         id: country.cioc || country.cca3,

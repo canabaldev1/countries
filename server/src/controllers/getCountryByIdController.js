@@ -3,7 +3,6 @@ const { Country, Activity, CountryName } = require("../db");
 module.exports = async (req, res) => {
   try {
     let { id } = req.params;
-    console.log(id);
     id = id.toUpperCase();
     const country = await Country.findByPk(id, {
       include: [

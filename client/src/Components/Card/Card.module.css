@@ -20,14 +20,12 @@
   width: 100%;
   aspect-ratio: 3/2;
   background-size: cover;
+  background-color: white;
   /* border: 1px red solid; */
   object-fit: cover;
   position: absolute;
   right: 0;
   top: 16.66666%;
-  /* transform: translate(0, -50%); */
-  /* animation-play-state: paused; */
-  /* transform-origin: top right; */
   transition: transform 0.2s linear;
   border-radius: 10px;
   /* display: none; */

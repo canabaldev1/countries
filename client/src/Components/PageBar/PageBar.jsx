@@ -15,7 +15,6 @@ function PageBar({ setPage, page }) {
   }
 
   const handleClick = (event) => {
-    console.log(event.preventDefaul);
     event.preventDefaul;
     const selectPage = Number(event.target.value);
     setPage(selectPage);

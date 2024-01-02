@@ -2,7 +2,6 @@ const { Activity, Country } = require("../db");
 
 module.exports = async (req, res) => {
   const { id } = req.body;
-  console.log(req.body);
 
   try {
     await Activity.destroy({

@@ -15,7 +15,7 @@ function NewActivities() {
   const [showNotification, setShowNotification] = useState(false);
   const [created, setCreated] = useState(false);
 
-  name = useDebounce(searchName, 500);
+  const name = useDebounce(searchName, 500);
 
   const countries = useSelector((state) => state.countries);
 
@@ -97,21 +97,27 @@ function NewActivities() {
 
     const endPoint = "http://localhost:3001/activity";
 
-    const { data } = await axios.post(endPoint, activityParams);
+    try {
+      const { data } = await axios.post(endPoint, activityParams);
 
-    if (data) {
-      setShowNotification(true);
-      setCreated(data.created);
+      if (data) {
+        setShowNotification(true);
+        setCreated(data.created);
+      }
+
+      setActivity({
+        name: "",
+        difficulty: "",
+        duration: "",
+        season: "",
+        countries: [],
+      });
+      setSearchName("");
+
+      setIsButtonDisabled(true);
+    } catch (error) {
+      window.alert(error.message);
     }
-
-    setActivity({
-      name: "",
-      difficulty: "",
-      duration: "",
-      season: "",
-      countries: [],
-    });
-    setSearchName("");
   };
 
   return (
@@ -263,7 +269,7 @@ function NewActivities() {
           </div>
         ) : (
           <div className={styles.notification}>
-            <p>AN ACTIVITY WITH THIS NAME ALREADY EXISTED</p>
+            <p>THE ACTIVITY WAS UPDATED</p>
             <button onClick={handleClose}>Close</button>
           </div>
         ))}
