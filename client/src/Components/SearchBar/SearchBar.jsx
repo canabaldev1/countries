@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SearchBar.module.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { filterCountries } from "../../Redux/actions.js";
 import axios from "axios";
 
-function SearchBar({ searchName, setSearchName }) {
+function SearchBar({ searchName, setSearchName, setPage }) {
   const dispatch = useDispatch();
 
   const [activities, setActivities] = useState([]);
@@ -24,14 +24,18 @@ function SearchBar({ searchName, setSearchName }) {
     "Europe",
   ];
 
-  const [filterData, setFilterData] = useState({
-    order: "ascending",
-    continents: [],
-    activities: [],
-    population: { min: 0, max: 0 },
-  });
+  // const [filterData, setFilterData] = useState({
+  //   order: "ascending",
+  //   continents: [],
+  //   activities: [],
+  //   population: { min: 0, max: 0 },
+  // });
+
+  const filterData = useSelector((state) => state.filterData);
 
   const handleFilter = (event) => {
+    setPage(1);
+
     var temporalFilters = { ...filterData };
 
     switch (event.target.name) {
@@ -82,15 +86,20 @@ function SearchBar({ searchName, setSearchName }) {
         break;
     }
 
-    setFilterData(temporalFilters);
+    // setFilterData(temporalFilters);
 
+    // dispatch(setFilters(temporalFilters));
     dispatch(filterCountries(temporalFilters));
   };
+
+  useEffect(() => {
+    dispatch(filterCountries(filterData));
+  });
 
   // const activities = ["actividad 1", "actividad 2", "actividad 3"];
 
   const fetchActivities = async () => {
-    const endPoint = "http://localhost:3001/activity";
+    const endPoint = "/activity";
     const { data } = await axios(endPoint);
     setActivities(data.activities);
   };
@@ -169,6 +178,7 @@ function SearchBar({ searchName, setSearchName }) {
                   name="continents"
                   value={c}
                   onChange={handleFilter}
+                  checked={filterData.continents.includes(c)}
                 />
                 <label key={`label${c}`} htmlFor={c}>
                   {c}
@@ -191,6 +201,7 @@ function SearchBar({ searchName, setSearchName }) {
                     name="activities"
                     value={a.name}
                     onChange={handleFilter}
+                    checked={filterData.activities.includes(a)}
                   />
                   <label htmlFor={a.id}>{a.name}</label>
                 </div>
